@@ -136,9 +136,7 @@ public class VarastoTest {
     public void merkkijonoEsitysOikein() {
         varasto.lisaaVarastoon(5);
         String s = "saldo = " + varasto.getSaldo() + ", viel√§ tilaa " + varasto.paljonkoMahtuu();
-        String ss = "saldo = 5, tilaa viel‰ 5";
         assertEquals(s, varasto.toString());
-        assertEquals(ss, varasto.toString());
     }
 
 }
