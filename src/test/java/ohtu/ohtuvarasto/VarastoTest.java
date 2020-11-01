@@ -64,5 +64,81 @@ public class VarastoTest {
         // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
     }
+    
+    @Test
+    public void konstruktoriLuoKelvottomanVarastonTilavuudella() {
+        Varasto varasto2 = new Varasto(0);
+        assertEquals(0.0, varasto2.getTilavuus(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void konstruktoriLuoKelvottomanVarastonTilavuudellaJaSaldolla() {
+        Varasto varasto2 = new Varasto(0,0);
+        assertEquals(0.0, varasto2.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void negatiivisellaSaldollaLuodunVarastonSaldoAlussaOikein() {
+        Varasto varasto2 = new Varasto(0,-2);
+        assertEquals(0.0, varasto2.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void josSaldoaEnemmanKuinTilavuuttaSaldoAlussaOikein() {
+        Varasto varasto2 = new Varasto(5,10);
+        assertEquals(5, varasto2.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void konstruktoriLuoVarastonOikeinAnnetuillaParametreilla() {
+        Varasto varasto2 = new Varasto(5, 2.5);
+        assertEquals(5, varasto2.getTilavuus(), vertailuTarkkuus);
+        assertEquals(2.5, varasto2.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void varastoonEiLisataJosMaaraNegatiivinen() {
+        double saldoAlussa = varasto.getSaldo();
+        
+        varasto.lisaaVarastoon(-5);
+        assertEquals(saldoAlussa, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void josLisataanEnemmanKuinTilaaYlimaarainenHukkaan() {
+        varasto.lisaaVarastoon(15);
+        assertEquals(10, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void negatiivinenOttoEiMuutaSaldoa() {
+        varasto.lisaaVarastoon(5);
+        varasto.otaVarastosta(-5);
+        assertEquals(5, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void josMaaraSuurempiKuinSaldoVarastoTyhjaLopuksi() {
+        varasto.lisaaVarastoon(5);
+        varasto.otaVarastosta(10);
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void josMaaraSuurempiKuinSaldoPalautetaanSaldo() {
+        varasto.lisaaVarastoon(5);
+        double saldo = varasto.getSaldo();
+        double saatuMaara = varasto.otaVarastosta(10);
+        assertEquals(saatuMaara, saldo, vertailuTarkkuus);
+    }
+    
+    @Test
+    public void merkkijonoEsitysOikein() {
+        varasto.lisaaVarastoon(5);
+        String s = "saldo = " + varasto.getSaldo() + ", vielä tilaa " + varasto.paljonkoMahtuu();
+        String ss = "saldo = 5, tilaa viel� 5";
+        assertEquals(s, varasto.toString());
+        assertEquals(ss, varasto.toString());
+    }
 
 }
