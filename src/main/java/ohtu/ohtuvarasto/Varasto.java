@@ -28,7 +28,7 @@ public class Varasto {
     }
 
     public void maaritaSaldo(double alkuSaldo) {
-        if (alkuSaldo <= 0.0) {
+        if (alkuSaldo < 0.0) {
             this.saldo = 0.0;
         } else if (alkuSaldo <= tilavuus) {
             this.saldo = alkuSaldo;
