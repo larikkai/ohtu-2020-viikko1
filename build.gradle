@@ -15,7 +15,7 @@ dependencies {
 }
 
 application {
-    mainClassName = 'paaohjelma.Main'
+    mainClass.set('paaohjelma.Main')
 }
 
 jar {
@@ -36,4 +36,4 @@ jacocoTestReport {
     }
 }
 
-checkstyleMain.exclude 'paaohjelma/Main.java'
+checkstyleMain.exclude ('paaohjelma/Main.java')
