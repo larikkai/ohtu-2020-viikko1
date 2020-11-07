@@ -138,5 +138,11 @@ public class VarastoTest {
         String s = "saldo = " + varasto.getSaldo() + ", vielä tilaa " + varasto.paljonkoMahtuu();
         assertEquals(s, varasto.toString());
     }
+    
+    @Test
+    public void luoVarastonOikeallaSaldollaJosAnnettuSaldoNegatiivinen(){
+        varasto = new Varasto(10, -1);
+        assertEquals(0, varasto.getSaldo(),vertailuTarkkuus);
+    }
 
 }
